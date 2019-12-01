@@ -7,13 +7,19 @@ import kotlinx.coroutines.runBlocking
 fun main() {
   runBlocking {
     launch {
-      delay(100)
-      println("Short launch")
-    }
+      launch {
+        println("Short launch 1")
+        delay(100)
+      }
+      launch {
+        println("Short launch 2")
+        delay(200)
+      }
+    }.invokeOnCompletion { println("Short launches completed") }
     launch {
-      delay(1000)
       println("Long launch")
-    }
+      delay(1000)
+    }.invokeOnCompletion { println("Long launch completed") }
   }
   println("After runBlocking")
 }
