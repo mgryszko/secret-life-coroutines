@@ -11,7 +11,8 @@ fun main() {
     }
     async_scopePassedAsArgument(this)
     async_scopeAsImplicitReceiver()
-    async_scopeDemarcation().await()
+    async_scopeDemarcationCoroutineScope()
+//    async_scopeDemarcationWithContext()
   }
 }
 
@@ -35,7 +36,7 @@ fun CoroutineScope.async_scopeAsImplicitReceiver() {
   }
 }
 
-suspend fun async_scopeDemarcation(): Deferred<Unit> {
+suspend fun async_scopeDemarcationCoroutineScope(): Deferred<Unit> {
   return coroutineScope {
     val deferred = async {
       println("Scope created with coroutineScope: before delay")
@@ -44,6 +45,20 @@ suspend fun async_scopeDemarcation(): Deferred<Unit> {
     }
     deferred.invokeOnCompletion { e ->
       println("Scope created with coroutineScope: completed with $e")
+    }
+    deferred
+  }
+}
+
+suspend fun async_scopeDemarcationWithContext(): Deferred<Unit> {
+  return withContext(Dispatchers.Unconfined) {
+    val deferred = async {
+      println("Scope created with withContext: before delay")
+      delay(1000)
+      println("Scope created with withContext: after delay")
+    }
+    deferred.invokeOnCompletion { e ->
+      println("Scope created with withContext: completed with $e")
     }
     deferred
   }
