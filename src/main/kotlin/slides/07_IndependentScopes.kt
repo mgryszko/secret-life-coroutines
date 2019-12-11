@@ -10,19 +10,21 @@ fun main() {
         delay(200)
         throw IllegalArgumentException()
       }
+      val result = suspendedAsync_globalScope()
 //      async_globalScope().await()
-      suspendedAsync_globalScope()
+      println("Result: $result")
     }
   } finally {
     Thread.sleep(1000)
   }
 }
 
-fun async_globalScope(): Deferred<Unit> {
+fun async_globalScope(): Deferred<Int> {
   val deferred = GlobalScope.async {
     println("Global (independent) scope:        before delay")
     delay(1000)
     println("Global (independent) scope:        after delay")
+    1
   }
   deferred.invokeOnCompletion { e ->
     println("Global (independent) scope:        completed with $e")
@@ -30,6 +32,5 @@ fun async_globalScope(): Deferred<Unit> {
   return deferred
 }
 
-suspend fun suspendedAsync_globalScope() {
+suspend fun suspendedAsync_globalScope(): Int =
   async_globalScope().await()
-}
