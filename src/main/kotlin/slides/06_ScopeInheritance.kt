@@ -4,6 +4,11 @@ import kotlinx.coroutines.*
 
 fun main() {
   runBlocking(Dispatchers.Default) {
+    launch {
+      println("main launch")
+      delay(200)
+      throw IllegalArgumentException()
+    }
     scopePassedAsArgument(this)
     scopeAsImplicitReceiver()
     scopeDemarcationCoroutineScope()
