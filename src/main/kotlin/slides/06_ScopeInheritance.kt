@@ -16,7 +16,7 @@ fun main() {
   }
 }
 
-fun scopePassedAsArgument(coroutineScope: CoroutineScope) {
+private fun scopePassedAsArgument(coroutineScope: CoroutineScope) {
   coroutineScope.launch {
     println("Scope passed as argument:          before delay")
     delay(1000)
@@ -26,7 +26,7 @@ fun scopePassedAsArgument(coroutineScope: CoroutineScope) {
   }
 }
 
-fun CoroutineScope.scopeAsImplicitReceiver() {
+private fun CoroutineScope.scopeAsImplicitReceiver() {
   launch {
     println("Scope as implicit receiver:        before delay")
     delay(1000)
@@ -36,7 +36,7 @@ fun CoroutineScope.scopeAsImplicitReceiver() {
   }
 }
 
-suspend fun scopeDemarcationCoroutineScope() {
+private suspend fun scopeDemarcationCoroutineScope() {
   coroutineScope {
     val job = launch {
       println("Scope created with coroutineScope: before delay")
@@ -49,7 +49,7 @@ suspend fun scopeDemarcationCoroutineScope() {
   }
 }
 
-suspend fun scopeDemarcationWithContext() {
+private suspend fun scopeDemarcationWithContext() {
   withContext(Dispatchers.Unconfined) {
     val job = launch {
       println("Scope created with withContext: before delay")

@@ -19,7 +19,7 @@ fun main() {
   }
 }
 
-fun async_globalScope(): Deferred<Int> {
+private fun async_globalScope(): Deferred<Int> {
   val deferred = GlobalScope.async {
     println("Global (independent) scope:        before delay")
     delay(1000)
@@ -32,5 +32,5 @@ fun async_globalScope(): Deferred<Int> {
   return deferred
 }
 
-suspend fun suspendedAsync_globalScope(): Int =
+private suspend fun suspendedAsync_globalScope(): Int =
   async_globalScope().await()

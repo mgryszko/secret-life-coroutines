@@ -11,14 +11,14 @@ fun main() {
   println("Urls: $urls")
 }
 
-fun url1(): Deferred<List<String>> =
+private fun url1(): Deferred<List<String>> =
   GlobalScope.async {
     println("URL 1: ${Thread.currentThread().name}")
     delay(100)
     listOf("http://example.com/url1")
   }
 
-suspend fun url2(): List<String> =
+private suspend fun url2(): List<String> =
   GlobalScope.async {
     println("URL 2: ${Thread.currentThread().name}")
     delay(1000)
