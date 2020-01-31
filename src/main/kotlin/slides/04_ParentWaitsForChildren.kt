@@ -1,11 +1,12 @@
 package slides
 
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 fun main() {
-  runBlocking {
+  runBlocking(Dispatchers.Default) {
     launch {
       launch {
         println("Short launch 1")
