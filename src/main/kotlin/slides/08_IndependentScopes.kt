@@ -10,8 +10,8 @@ fun main() {
         delay(200)
         throw IllegalArgumentException()
       }
-      val result = suspendedAsync_globalScope()
-//      async_globalScope().await()
+//      val result = suspendedAsync_globalScope()
+      val result = async_globalScope().await()
       println("Result: $result")
     }
   } finally {
