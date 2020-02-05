@@ -4,6 +4,7 @@ import kotlinx.coroutines.*
 
 fun main() {
   runBlocking(Dispatchers.Default) {
+    coroutineContext[Job]!!.invokeOnCompletion { e -> println("runBlocking completed with $e") }
     launch {
       println("main launch")
       delay(200)
