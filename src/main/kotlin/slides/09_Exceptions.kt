@@ -9,12 +9,12 @@ fun main() {
         if (e == null) println("Completed successfully")
         else println("Completed exceptionally with $e")
       }
-//      async_localScope()
-//      launch_localScope()
+//      async_sharedScope()
+//      launch_sharedScope()
 //      async_globalScope()
-//      launch_globalScope()
+      launch_globalScope()
 //      async_globalScope().await()
-      launch_globalScope().join()
+//      launch_globalScope().join()
       delay(200)
     }
     println("After runBlocking")
@@ -23,14 +23,14 @@ fun main() {
   }
 }
 
-private fun CoroutineScope.async_localScope() = async {
+private fun CoroutineScope.async_sharedScope() = async {
   delay(100)
-  throw IllegalArgumentException("async local scope")
+  throw IllegalArgumentException("async shared scope")
 }
 
-private fun CoroutineScope.launch_localScope() = launch {
+private fun CoroutineScope.launch_sharedScope() = launch {
   delay(100)
-  throw IllegalArgumentException("launch local scope")
+  throw IllegalArgumentException("launch shared scope")
 }
 
 private fun async_globalScope() = GlobalScope.async {
